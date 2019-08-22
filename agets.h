@@ -1,3 +1,5 @@
+#ifndef AGETS
+#define AGETS
 #include<stdio.h>
 #include<stdlib.h>
 char * agets(FILE * src);
@@ -31,3 +33,4 @@ char * agets(FILE * src){
 		return ret;
 	}
 }
+#endif
