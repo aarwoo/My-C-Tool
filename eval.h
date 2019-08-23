@@ -35,19 +35,19 @@ const char * tostr_number(number x){
 	char tmp[2][256];
 	char * w,* r;
 	if(b==0){
-		__mingw_snprintf(tmp[0],256,"%.17Lg",a);
+		__mingw_snprintf(tmp[0],256,"%.15Lg",a);
 	}else{
 		if(a==0){
 			if(fabs(b)==1){
 				__mingw_snprintf(tmp[0],256,"%si",b>0?"":"-");
 			}else{
-				__mingw_snprintf(tmp[0],256,"%s%.17Lg*i",(b>0||isnan(b)==true)?"+":"-",fabs(b));
+				__mingw_snprintf(tmp[0],256,"%s%.15Lg*i",(b>0||isnan(b)==true)?"+":"-",fabs(b));
 			}
 		}else{
 			if(fabs(b)==1){
-				__mingw_snprintf(tmp[0],256,"%.17Lg%si",a,(b>0||isnan(b)==true)?"+":"-");
+				__mingw_snprintf(tmp[0],256,"%.15Lg%si",a,(b>0||isnan(b)==true)?"+":"-");
 			}else{
-				__mingw_snprintf(tmp[0],256,"%.17Lg%s%.17Lg*i",a,(b>0||isnan(b)==true)?"+":"-",fabs(b));
+				__mingw_snprintf(tmp[0],256,"%.15Lg%s%.15Lg*i",a,(b>0||isnan(b)==true)?"+":"-",fabs(b));
 			}
 		}
 	}
@@ -216,7 +216,7 @@ number atom_calc(const char * atom,number (*var_map)(const char * var)){
 								/*Pass*/\
 							}\
 						}\
-						ans=c_func(sub_eval(tmp+1,split_argv-tmp,var_map),\
+						ans=c_func(sub_eval(tmp+1,split_argv-(tmp+1),var_map),\
 								   sub_eval(split_argv+1,strlen(split_argv+1)-1,var_map));
 				#define __func_calc__(math_func,c_func,number_of_argv) \
 						if(strcmp(var,#math_func)==0){\
