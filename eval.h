@@ -12,10 +12,10 @@ number eval(const char * expr,number (*var_map)(const char * var));
  *expr:expression
  *var_map:A function that receive variable name and return its value,it could be NULL
  *The Variable i is constant equals to sqrt(-1) in any case
- *The Variable nan is constant equals to 0/0
- *The Variable inf is constant equals to 1/0
- *The Variable e is constant equals to exp(1)
- *The Variable pi is constant equals to arccos(-1)
+ *The Variable nan is constant equals to 0/0 in any case 
+ *The Variable inf is constant equals to 1/0 in any case 
+ *The Variable e is constant equals to exp(1) in any case
+ *The Variable pi is constant equals to arccos(-1) in any case
  *Supports operator: ^ * / + -
  *Supports function: sin cos tan arcsin arccos arctan sinh cosh tanh arcsinh arccosh arctanh 
  *					 abs conj proj real imag arg log lg ln sqrt exp
