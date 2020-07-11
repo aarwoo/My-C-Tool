@@ -1,4 +1,6 @@
-﻿#ifndef agets_h
+/*You cannot mix agets and other functions to read the file
+Or else,you will meet the Bug.*/
+#ifndef agets_h
 #define agets_h
 #include<stdio.h>
 #include<stdlib.h>
