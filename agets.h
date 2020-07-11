@@ -1,4 +1,4 @@
-/*You cannot mix agets and other functions to read the file
+﻿/*You cannot mix agets and other functions to read the file
 Or else,you will meet the Bug.*/
 #ifndef agets_h
 #define agets_h
