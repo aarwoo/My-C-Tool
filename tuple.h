@@ -46,24 +46,25 @@ bool _foreach_tuple(tuple * _tuple,bool (*func)(tuple * x,void * ex_argv),void *
 bool foreach_tuple(tuple * _tuple,bool (*func)(tuple * x,void * ex_argv),void * ex_argv){
 	return _foreach_tuple(_tuple,func,ex_argv,true);
 }
-tuple *  _remove_if_tuple(tuple * ret_tuple,tuple * last_tuple,tuple * _tuple,bool (*func_if)(const tuple * x,void * ex_argv),void * ex_argv){
+tuple *  _remove_if_tuple(tuple * virtual_head_tuple,tuple * last_tuple,tuple * _tuple,bool (*func_if)(const tuple * x,void * ex_argv),void * ex_argv){
 	if(_tuple!=NULL&&func_if!=NULL){
 		tuple tmp=make_tmp_tuple(*_tuple);
-		if((*func_if)(&tmp,ex_argv)==true){
-			return _remove_if_tuple(ret_tuple,_tuple,_tuple->next,func_if,ex_argv);
+		if((*func_if)(&tmp,ex_argv)==false){
+			return _remove_if_tuple(virtual_head_tuple,_tuple,_tuple->next,func_if,ex_argv);
 		}else{
 			(*(_tuple->delete_data))(_tuple->data);
 			last_tuple->next=_tuple->next;
 			free(_tuple);
-			return _remove_if_tuple(ret_tuple,last_tuple,last_tuple->next,func_if,ex_argv);
+			return _remove_if_tuple(virtual_head_tuple,last_tuple,last_tuple->next,func_if,ex_argv);
 		}
 	}else{
-		return ret_tuple;
+		return virtual_head_tuple->next;
 	}
 }
 tuple * remove_if_tuple(tuple * _tuple,bool (*func_if)(const tuple * x,void * ex_argv),void * ex_argv){
-	tuple virtual_last_tuple;
-	return _remove_if_tuple(_tuple,&virtual_last_tuple,_tuple,func_if,ex_argv);
+	tuple virtual_head_tuple;
+	virtual_head_tuple.next=_tuple;
+	return _remove_if_tuple(&virtual_head_tuple,&virtual_head_tuple,virtual_head_tuple.next,func_if,ex_argv);
 }
 void * reduce_tuple(tuple * _tuple,void * (*func)(void * reduce_ans,const tuple * x),void * init_reduce_ans){
 	if(_tuple!=NULL&&func!=NULL){
